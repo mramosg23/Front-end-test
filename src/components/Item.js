@@ -13,8 +13,6 @@ import ShareIcon from '@mui/icons-material/Share';
 import accounting from "accounting"
 import { maxHeight } from '@mui/system';
 
-
-
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 250,

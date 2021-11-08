@@ -2,6 +2,7 @@ import './App.css';
 import React, { useEffect } from 'react'
 import Item from "./components/Item"
 import Api from "./services/Api";
+import Header from './components/Header';
 
 function App() {
   const api = new Api();
@@ -18,6 +19,7 @@ function App() {
 
   return (
     <div className="App">
+      <Header/>
       <Item/>
     </div>
   );
