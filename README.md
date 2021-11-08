@@ -25,4 +25,4 @@ To Visit App:
 
 
 ## License
-[MIT](Marcos Ramos Gonzalez)
+Marcos Ramos Gonzalez
