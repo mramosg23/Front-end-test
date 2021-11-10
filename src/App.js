@@ -1,9 +1,9 @@
 import './App.css';
 import { ThemeProvider } from '@mui/material/styles';
 import {themeAmaphone} from './styles/Theme.js'
-import Header from './components/Header';
-import Items from './components/Items';
 import { CssBaseline } from '@mui/material';
+import { BrowserRouter } from "react-router-dom";
+import { RouterConfig } from '../src/navigation/RouterConfig';
 
 function App() {
   
@@ -12,14 +12,9 @@ function App() {
     <ThemeProvider theme={themeAmaphone}>
       <div className="App">
       <CssBaseline/>
-        <Header/>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-
-        <Items/>
+        <BrowserRouter>
+          <RouterConfig></RouterConfig>
+        </BrowserRouter>
       </div>
     </ThemeProvider>
   );

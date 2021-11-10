@@ -43,7 +43,7 @@ export default function Items(props) {
     <Box className={classes.root}>
       <Grid container spacing={2}>
           {items.map((product, index) =>
-            <Grid className={classes.item} item xs={12} sm={6} md={3}>
+            <Grid className={classes.item} item xs={3}>
                 <Item key={index} product={product}/>
             </Grid>
           )}

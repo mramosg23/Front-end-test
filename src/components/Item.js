@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
+import Box from '@mui/material/Box';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -15,14 +15,10 @@ import { maxHeight } from '@mui/system';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '25vw',
-    borderRadius: '10px'
+    width: '22vw'
   },
   action: {
-    marginTop: "1rem",
-  },
-  media: {
-    paddingTop: "56.25%"
+    marginTop: "1rem"
   }
 }));
 
@@ -37,29 +33,26 @@ export default function Item(props) {
         
         action={
           <Typography 
-            variant='h5'
-            color="textSecondary">
+            variant='h6'
+            color="#ed942e">
             {accounting.formatMoney(props.product.price, "€")}
           </Typography>
         }
-        title={props.product.model}
+        title={
+          <Typography 
+            variant='h6'>
+            {props.product.model}
+          </Typography>
+        }
         subheader={props.product.brand}
       />
       <CardMedia
         component="img"
+        style={{padding: '0 35px 35px'}}
         image={props.product.imgUrl}
         alt={props.product.id}
       />
 
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-  
-      </CardActions>
     </Card>
   );
 }

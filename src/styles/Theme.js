@@ -11,7 +11,7 @@ export const themeAmaphone = createTheme( {
     },
   },
   body: {
-    backgroundColor: 'black'
+    backgroundColor: 'black',
   }
 });
 
