@@ -15,7 +15,8 @@ import { maxHeight } from '@mui/system';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 250,
+    width: '25vw',
+    borderRadius: '10px'
   },
   action: {
     marginTop: "1rem",
@@ -26,8 +27,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Item() {
+export default function Item(props) {
   const classes = useStyles();
+  debugger
 
   return (
     <Card className={classes.root}>
@@ -37,24 +39,18 @@ export default function Item() {
           <Typography 
             variant='h5'
             color="textSecondary">
-            {accounting.formatMoney(50, "€")}
+            {accounting.formatMoney(props.product.price, "€")}
           </Typography>
         }
-        title="Iconia Talk S"
-        subheader="Acer"
+        title={props.product.model}
+        subheader={props.product.brand}
       />
       <CardMedia
         component="img"
-        image="https://front-test-api.herokuapp.com/images/ZmGrkLRPXOTpxsU4jjAcv.jpg"
-        alt="Phone"
+        image={props.product.imgUrl}
+        alt={props.product.id}
       />
-      {/* <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the mussels,
-          if you like.
-        </Typography>
-      </CardContent>*/}
+
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />

@@ -1,27 +1,27 @@
 import './App.css';
-import React, { useEffect } from 'react'
-import Item from "./components/Item"
-import Api from "./services/Api";
+import { ThemeProvider } from '@mui/material/styles';
+import {themeAmaphone} from './styles/Theme.js'
 import Header from './components/Header';
+import Items from './components/Items';
+import { CssBaseline } from '@mui/material';
 
 function App() {
-  const api = new Api();
-
-
-  useEffect(() => {
-      console.log("Pide items: ");
-      api.
-      getItems()
-      .then((response) => console.log(response))
-      .catch((err) => console.log(err));
-  }, []);
-
+  
 
   return (
-    <div className="App">
-      <Header/>
-      <Item/>
-    </div>
+    <ThemeProvider theme={themeAmaphone}>
+      <div className="App">
+      <CssBaseline/>
+        <Header/>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+
+        <Items/>
+      </div>
+    </ThemeProvider>
   );
 }
 
