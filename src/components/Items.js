@@ -22,22 +22,26 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Items(props) {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(JSON.parse(sessionStorage.getItem('storageItems')) || []);
   const [loadItems, setLoadItems] = useState(false);
   const classes = useStyles()
   const api = new Api();
 
   useEffect(() => {
-    console.log("Pide items: ");
+    debugger
+
+    if(sessionStorage.getItem('storageItems')){}
+    else{
       api.
         getItems()
         .then((response) => {
-            setLoadItems(true)
+            sessionStorage.setItem('storageItems', JSON.stringify(response.data))
             setItems(response.data)
       })  
         .catch((err) =>   
             console.log(err));
-  }, [loadItems]);
+    }
+  }, [setItems]);
 
         
   return (

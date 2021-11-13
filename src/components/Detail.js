@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import { Paper } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import Api from '../services/Api.js';
+import { Link } from 'react-router-dom';
 import List from '@mui/material/List';
 import { Typography } from '@mui/material';
 import ListItem from '@mui/material/ListItem';
@@ -15,6 +16,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import accounting from "accounting"
 
@@ -74,7 +76,11 @@ export default function Detail(props) {
   return (
     <Box className={classes.root}>
       <Grid container spacing={2}>
-        <Grid item xs={2}/>
+        <Grid item xs={2}>
+            <Link to={{pathname:'/'}} style={{textDecoration: 'none'}}>
+                <ArrowBackIcon style={{fontSize: '40px'}} color="primary"/>
+            </Link>
+        </Grid>
         <Grid item xs={4}>
         <Grid container spacing={2}>
             <Grid item xs={12}>

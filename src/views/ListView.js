@@ -16,7 +16,7 @@ export default function ListView(props) {
   return (
     <div className={classes.root}>
       <Header/>
-      <Box mt={12}>
+      <Box pt={12}>
         <Items/>
       </Box>
     </div>

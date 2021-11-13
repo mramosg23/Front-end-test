@@ -18,7 +18,7 @@ export default function DetailView(props) {
   return (
     <div className={classes.root}>
       <Header/>
-      <Box mt={12}>
+      <Box pt={12}>
         <Detail productID={location.search.substring(1)}/>
       </Box>
     </div>
