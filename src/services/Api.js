@@ -21,7 +21,11 @@ export default class Api {
   };
 
   getItems = () => {
-    return this.init().get("/api/product");
+    return this.init().get(`/api/product`);
+  };
+
+  getDetail = (id) => {
+    return this.init().get(`/api/product/${id}`);
   };
 
 }

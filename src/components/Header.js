@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -33,9 +33,9 @@ export default function Header() {
       <AppBar position="fixed" className={classes.appBar} >
         <Toolbar>
 
-          <Button aria-label="logo" sx={{ mr: 2 }}>
+          <Link to={{pathname:'/'}} style={{textDecoration: 'none'}}>
             <img className={classes.logo} src={logo}/>
-          </Button>
+          </Link>
 
           <Box className={classes.buttonCart}>
             <IconButton aria-label="cart items" color="inherit">

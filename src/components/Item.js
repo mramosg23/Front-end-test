@@ -19,18 +19,26 @@ const useStyles = makeStyles((theme) => ({
   },
   action: {
     marginTop: "1rem"
+  },
+  cardHeaderRoot: {
+    overflow: "hidden"
+  },
+  cardHeaderContent: {
+    overflow: "hidden"
   }
 }));
 
 
 export default function Item(props) {
   const classes = useStyles();
-  debugger
 
   return (
     <Card className={classes.root}>
       <CardHeader
-        
+        classes={{
+          root: classes.cardHeaderRoot,
+          content: classes.cardHeaderContent
+        }}
         action={
           <Typography 
             variant='h6'
@@ -40,6 +48,7 @@ export default function Item(props) {
         }
         title={
           <Typography 
+            noWrap gutterBottom
             variant='h6'>
             {props.product.model}
           </Typography>
