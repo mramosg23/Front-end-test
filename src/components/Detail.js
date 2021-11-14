@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { makeStyles } from '@mui/styles';
 import Box from '@mui/material/Box';
 import { Paper } from '@mui/material';
@@ -19,6 +19,8 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import accounting from "accounting"
+import { actionTypes } from '../reducer.js';
+import { useStateValue } from '../StateProvider.js';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center'
     },
     image:{
-        padding: '2rem',
+        padding: '1rem',
         width: '20vw'
     },
     listItem:{
@@ -48,48 +50,74 @@ export default function Detail(props) {
     const [item, setItem] = useState("");
     const [loadItem, setLoadItem] = useState(false);
     const [color, setColor] = React.useState('');
-    const [storage, setStorage] = React.useState('');
+    const [storage, setStorage] = useState('');
+    const [addToCart, setAddToCart] = useState(false);
+    const [, dispatch] = useStateValue();
     const classes = useStyles()
     const api = new Api();
 
     const handleChangeColors = (event) => {
         setColor(event.target.value);
+        if(storage !== ''){
+            setAddToCart(true)
+        }
     };
     
     const handleChangeStorage = (event) => {
         setStorage(event.target.value);
+        if(color !== ''){
+            setAddToCart(true)
+        }
     };
 
+    const addToBasket = () => {
+
+        let data = {
+            "id": item.id,
+            "colorCode": color,
+            "storageCode": storage
+        }
+
+        api.addToCart(data)
+        .then((response) => {
+            dispatch({
+                type: actionTypes.ADD_ITEM,
+                cartCount: response.data.count
+            })
+        })
+        .catch((err) =>   
+            console.log(err));
+    }
+
     useEffect(() => {
-        debugger
         console.log("Pide item: ");
-        api.
-        getDetail(props.productID)
+        api.getDetail(props.productID)
         .then((response) => {
             setLoadItem(true)
             setItem(response.data)
         })  
         .catch((err) =>   
             console.log(err));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [loadItem]);
         
   return (
     <Box className={classes.root}>
       <Grid container spacing={2}>
-        <Grid item xs={2}>
+        <Grid item xs={2} sm={2}>
             <Link to={{pathname:'/'}} style={{textDecoration: 'none'}}>
                 <ArrowBackIcon style={{fontSize: '40px'}} color="primary"/>
             </Link>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={8} sm={4}>
         <Grid container spacing={2}>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={12}>
                 <Paper className={classes.imageContainer}>
-                    <img className={classes.image} src={item.imgUrl} />
+                    <img alt="photoMobile" className={classes.image} src={item.imgUrl} />
                 </Paper>
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={6} sm={6}>
                 <Paper>
                 <Box sx={{ minWidth: 120 }}>
                     <FormControl fullWidth>
@@ -102,7 +130,7 @@ export default function Detail(props) {
                             onChange={handleChangeColors}
                             >
                             {item.options?.colors.map((color, index) =>
-                            <MenuItem key={index} value={color.name}>{color.name}</MenuItem>
+                            <MenuItem key={index} value={color.code}>{color.name}</MenuItem>
                             )}
                         </Select>
                     </FormControl>
@@ -110,7 +138,7 @@ export default function Detail(props) {
                 </Paper>
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item xs={6} sm={6}>
                 <Paper>
                 <Box sx={{ minWidth: 120 }}>
                     <FormControl fullWidth>
@@ -123,7 +151,7 @@ export default function Detail(props) {
                             onChange={handleChangeStorage}
                             >
                             {item.options?.storages.map((storage, index) =>
-                            <MenuItem key={index} value={storage.name}>{storage.name}</MenuItem>
+                            <MenuItem key={index} value={storage.code}>{storage.name}</MenuItem>
                             )}
                         </Select>
                     </FormControl>
@@ -131,14 +159,20 @@ export default function Detail(props) {
                 </Paper>
             </Grid>
 
-            <Grid item xs={12}>
-                    <Button className={classes.addBasket} variant="contained">Añadir al carrito  <ShoppingCartIcon></ShoppingCartIcon></Button>
+            <Grid item xs={12} sm={12}>
+                    <Button onClick={addToBasket} className={classes.addBasket} 
+                            disabled={!addToCart}
+                            variant="contained">Añadir al carrito  
+                            <ShoppingCartIcon></ShoppingCartIcon>
+                    </Button>
             </Grid>
             </Grid>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={2} display={{ sm: "none"}}/>
+        <Grid item xs={2} display={{ sm: "none"}}/>
+        <Grid item xs={8} sm={4}>
          <Grid container spacing={2}>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={12}>
                 <Paper className={classes.imageContainer}>
                         <Typography pt={1} variant='h4'>
                             {item.model}
@@ -212,7 +246,7 @@ export default function Detail(props) {
             </Grid>
          </Grid>
         </Grid>
-        <Grid item xs={2}/>
+        <Grid item xs={2} sm={2}/>
       </Grid>
     </Box>
   );

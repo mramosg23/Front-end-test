@@ -1,4 +1,4 @@
-﻿import * as axios from "axios";
+import * as axios from "axios";
 
 export default class Api {
   constructor() {
@@ -28,4 +28,7 @@ export default class Api {
     return this.init().get(`/api/product/${id}`);
   };
 
+  addToCart = (data) => {
+    return this.init().post(`/api/cart`, data);
+  };
 }
